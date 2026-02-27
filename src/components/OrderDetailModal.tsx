@@ -2,6 +2,7 @@ import React from 'react';
 import { useUI } from '../contexts/UIContext';
 import { useOrders } from '../contexts/OrdersContext';
 import { IconX, IconUser, IconPhone, IconMapPin, IconCreditCard, IconCheckCircle } from '../constants';
+import { Sheet, SheetContent } from './ui/sheet';
 
 export const OrderDetailModal: React.FC = () => {
     const { isOrderDetailModalOpen, viewingOrderId, closeOrderDetailModal, openCancelOrderModal } = useUI();
@@ -13,8 +14,8 @@ export const OrderDetailModal: React.FC = () => {
     if (!order) return null;
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-end z-50">
-            <div className="bg-white h-full w-full max-w-md shadow-2xl overflow-y-auto animate-in slide-in-from-right duration-300">
+        <Sheet open={isOrderDetailModalOpen} onOpenChange={(open) => !open && closeOrderDetailModal()}>
+            <SheetContent side="right" showCloseButton={false} className="h-full w-full max-w-md overflow-y-auto border-0 p-0 shadow-2xl">
                 <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white z-10">
                     <div>
                         <h2 className="text-xl font-bold text-gray-900">Order #{order.id}</h2>
@@ -134,7 +135,7 @@ export const OrderDetailModal: React.FC = () => {
                         )}
                     </div>
                 </div>
-            </div>
-        </div>
+            </SheetContent>
+        </Sheet>
     );
 };

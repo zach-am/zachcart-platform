@@ -1,6 +1,7 @@
 import React from 'react';
 import { useUI } from '../contexts/UIContext';
 import { IconCheckCircle, IconWarning } from '../constants';
+import { Dialog, DialogContent } from './ui/dialog';
 
 export const SuccessModal: React.FC = () => {
     const { isSuccessModalOpen, successModalInfo, closeSuccessModal } = useUI();
@@ -10,8 +11,8 @@ export const SuccessModal: React.FC = () => {
     const isSuccess = successModalInfo.type !== 'warning';
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 max-w-sm w-full shadow-xl text-center">
+        <Dialog open={isSuccessModalOpen} onOpenChange={(open) => !open && closeSuccessModal()}>
+            <DialogContent showCloseButton={false} className="max-w-sm p-6 gap-0 rounded-lg border-0 shadow-xl text-center">
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 ${isSuccess ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'}`}>
                     {isSuccess ? <IconCheckCircle className="w-6 h-6" /> : <IconWarning className="w-6 h-6" />}
                 </div>
@@ -37,7 +38,7 @@ export const SuccessModal: React.FC = () => {
                 >
                     Got it
                 </button>
-            </div>
-        </div>
+            </DialogContent>
+        </Dialog>
     );
 };

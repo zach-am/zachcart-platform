@@ -2,6 +2,7 @@ import React from 'react';
 import { useUI } from '../contexts/UIContext';
 import { useOrders } from '../contexts/OrdersContext';
 import { IconWarning } from '../constants';
+import { Dialog, DialogContent } from './ui/dialog';
 
 export const CancelOrderModal: React.FC = () => {
     const { isCancelOrderModalOpen, cancelingOrderId, closeCancelOrderModal } = useUI();
@@ -15,8 +16,8 @@ export const CancelOrderModal: React.FC = () => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full shadow-xl">
+        <Dialog open={isCancelOrderModalOpen} onOpenChange={(open) => !open && closeCancelOrderModal()}>
+            <DialogContent showCloseButton={false} className="max-w-md p-6 gap-0 rounded-lg border-0 shadow-xl">
                 <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4">
                     <IconWarning className="w-6 h-6 text-red-600" />
                 </div>
@@ -49,7 +50,7 @@ export const CancelOrderModal: React.FC = () => {
                         Confirm Cancellation
                     </button>
                 </div>
-            </div>
-        </div>
+            </DialogContent>
+        </Dialog>
     );
 };
