@@ -5,16 +5,26 @@ import zachcartLogo from '../assets/branding/zachcart-logo.svg';
 import zachcartIcon from '../assets/branding/zachcart-icon.png';
 import { buttonVariants } from './ui/button';
 import { cn } from '@/lib/utils';
+import { ViewType } from '../types';
+
+type SidebarView = Extract<ViewType, 'home' | 'orders' | 'catalog' | 'channels' | 'partners' | 'settings' | 'financial' | 'help'>;
+
+interface SidebarMenuItem {
+    id: SidebarView;
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+    hasSubmenu?: boolean;
+}
 
 export const Sidebar: React.FC = () => {
     const { currentView, navigate, isSidebarCollapsed } = useUI();
 
-    const menuItems = [
+    const menuItems: SidebarMenuItem[] = [
         { id: 'home', label: 'Home', icon: IconHome },
         { id: 'orders', label: 'Orders', icon: IconShoppingBag },
         { id: 'catalog', label: 'Catalog', icon: IconTag },
         { id: 'channels', label: 'Channels', icon: IconStore, hasSubmenu: true },
-        { id: 'partners', label: 'Partners', icon: IconChart }, // Using Chart icon as placeholder for Partners from screenshot
+        { id: 'partners', label: 'Partners', icon: IconChart },
 
         { id: 'settings', label: 'Settings', icon: IconSettings },
         { id: 'financial', label: 'Finance', icon: IconDollar },
@@ -37,7 +47,7 @@ export const Sidebar: React.FC = () => {
                     return (
                         <div key={item.id}>
                             <button
-                                onClick={() => navigate({ type: item.id as any })}
+                                onClick={() => navigate({ type: item.id })}
                                 className={cn(
                                     buttonVariants({ variant: 'ghost' }),
                                     `w-full justify-start gap-3 px-3 py-2.5 rounded-lg transition-colors h-auto ${

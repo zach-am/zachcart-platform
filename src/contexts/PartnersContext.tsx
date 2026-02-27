@@ -10,7 +10,7 @@ const PartnersContext = createContext<PartnersContextType | undefined>(undefined
 
 export const PartnersProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [partnerStatuses] = useState(new Map([['iqvia', 'available'], ['cimed', 'available']]));
-    const openPartnerModal = (partner: Partner) => console.log("Open partner", partner.name);
+    const openPartnerModal = (_partner: Partner) => {};
 
     return (
         <PartnersContext.Provider value={{ partnerStatuses, openPartnerModal }}>

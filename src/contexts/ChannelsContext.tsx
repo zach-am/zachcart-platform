@@ -11,7 +11,7 @@ interface ChannelsContextType {
 const ChannelsContext = createContext<ChannelsContextType | undefined>(undefined);
 
 export const ChannelsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [channelStatuses, setChannelStatuses] = useState<Map<string, ChannelStatus>>(new Map([
+    const [channelStatuses] = useState<Map<string, ChannelStatus>>(new Map([
         ['ifood', 'active'],
         ['rappi', 'available'],
         ['uber_eats', 'available'],
@@ -24,9 +24,7 @@ export const ChannelsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         ['aiqfome', { channelId: 'aiqfome', preparationTimeInMinutes: 30 }]
     ]));
 
-    const openOnboardingModal = (channel: SalesChannel) => {
-        console.log("Open onboarding for", channel.name);
-    };
+    const openOnboardingModal = (_channel: SalesChannel) => {};
 
     const updateChannelConfig = (channelId: string, config: Partial<ChannelConfig>) => {
         setChannelConfigs(prev => {

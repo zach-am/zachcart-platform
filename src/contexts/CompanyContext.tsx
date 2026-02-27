@@ -1,4 +1,15 @@
 import React, { createContext, useContext } from 'react';
-export const CompanyContext = createContext<any>({ hasOverduePayment: false });
-export const CompanyProvider: React.FC<{children: React.ReactNode}> = ({children}) => <CompanyContext.Provider value={{ hasOverduePayment: false }}>{children}</CompanyContext.Provider>;
+
+interface CompanyContextValue {
+    hasOverduePayment: boolean;
+}
+
+const defaultCompanyValue: CompanyContextValue = { hasOverduePayment: false };
+
+export const CompanyContext = createContext<CompanyContextValue>(defaultCompanyValue);
+
+export const CompanyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <CompanyContext.Provider value={defaultCompanyValue}>{children}</CompanyContext.Provider>
+);
+
 export const useCompany = () => useContext(CompanyContext);
