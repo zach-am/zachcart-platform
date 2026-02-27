@@ -1,9 +1,12 @@
 import React from 'react';
 import { PageHeader } from './PageHeader';
-import { SALES_CHANNELS, IconSearch, IconFilter, IconPlus, IconCheckCircle } from '../constants';
+import { SALES_CHANNELS, IconSearch, IconPlus, IconCheckCircle } from '../constants';
 import { ChannelCard } from './ChannelCard';
 import { useChannels } from '../contexts/ChannelsContext';
 import { useUI } from '../contexts/UIContext';
+import { Card, CardContent } from './ui/card';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
 
 export const ManageChannelsPage: React.FC = () => {
     const { channelStatuses, openOnboardingModal } = useChannels();
@@ -11,6 +14,7 @@ export const ManageChannelsPage: React.FC = () => {
 
     const activeChannels = SALES_CHANNELS.filter(c => channelStatuses.get(c.id) === 'active');
     const availableChannels = SALES_CHANNELS.filter(c => channelStatuses.get(c.id) !== 'active');
+    const onboardingChannels = SALES_CHANNELS.filter(c => ['pending', 'in_progress', 'credentials_pending'].includes(channelStatuses.get(c.id) || ''));
 
     return (
         <div className="p-6 max-w-7xl mx-auto">
@@ -18,33 +22,39 @@ export const ManageChannelsPage: React.FC = () => {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
-                    <div>
-                        <p className="text-sm text-gray-500 font-medium">Onboarding</p>
-                        <p className="text-3xl font-bold text-gray-900 mt-1">0</p>
-                    </div>
-                    <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center text-yellow-600">
-                        <IconPlus className="w-6 h-6" />
-                    </div>
-                </div>
-                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
-                    <div>
-                        <p className="text-sm text-gray-500 font-medium">Available</p>
-                        <p className="text-3xl font-bold text-gray-900 mt-1">{availableChannels.length}</p>
-                    </div>
-                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600">
-                        <IconPlus className="w-6 h-6" />
-                    </div>
-                </div>
-                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
-                    <div>
-                        <p className="text-sm text-gray-500 font-medium">Active</p>
-                        <p className="text-3xl font-bold text-gray-900 mt-1">{activeChannels.length}</p>
-                    </div>
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
-                        <IconCheckCircle className="w-6 h-6" />
-                    </div>
-                </div>
+                <Card className="rounded-xl border-gray-200 shadow-sm">
+                    <CardContent className="flex items-center justify-between p-6">
+                        <div>
+                            <p className="text-sm text-gray-500 font-medium">Onboarding</p>
+                            <p className="text-3xl font-bold text-gray-900 mt-1">{onboardingChannels.length}</p>
+                        </div>
+                        <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center text-yellow-600">
+                            <IconPlus className="w-6 h-6" />
+                        </div>
+                    </CardContent>
+                </Card>
+                <Card className="rounded-xl border-gray-200 shadow-sm">
+                    <CardContent className="flex items-center justify-between p-6">
+                        <div>
+                            <p className="text-sm text-gray-500 font-medium">Available</p>
+                            <p className="text-3xl font-bold text-gray-900 mt-1">{availableChannels.length}</p>
+                        </div>
+                        <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600">
+                            <IconPlus className="w-6 h-6" />
+                        </div>
+                    </CardContent>
+                </Card>
+                <Card className="rounded-xl border-gray-200 shadow-sm">
+                    <CardContent className="flex items-center justify-between p-6">
+                        <div>
+                            <p className="text-sm text-gray-500 font-medium">Active</p>
+                            <p className="text-3xl font-bold text-gray-900 mt-1">{activeChannels.length}</p>
+                        </div>
+                        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+                            <IconCheckCircle className="w-6 h-6" />
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
 
             <div className="mb-8">
@@ -53,15 +63,15 @@ export const ManageChannelsPage: React.FC = () => {
                 <div className="flex flex-col md:flex-row gap-4 mb-6">
                     <div className="relative flex-1">
                         <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                        <input 
+                        <Input
                             type="text" 
                             placeholder="Search" 
-                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                            className="border-gray-300 bg-white pl-10 shadow-none focus-visible:ring-teal-500"
                         />
                     </div>
-                    <button className="px-4 py-2 border border-gray-300 rounded-lg flex items-center gap-2 text-gray-700 hover:bg-gray-50">
+                    <Button variant="outline" className="border-gray-300 text-gray-700 shadow-none hover:bg-gray-50">
                         Sort: A-Z
-                    </button>
+                    </Button>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -84,4 +94,3 @@ export const ManageChannelsPage: React.FC = () => {
         </div>
     );
 };
-
