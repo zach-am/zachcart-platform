@@ -1,6 +1,7 @@
 import React from 'react';
 import { IconChevronLeft } from '../constants';
 import { useUI } from '../contexts/UIContext';
+import { Button } from './ui/button';
 
 interface PageHeaderProps {
     title: string;
@@ -15,9 +16,9 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ title, description, acti
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div className="flex items-center gap-2">
                 {showBackButton && (
-                    <button onClick={() => navigate({ type: 'home' })} className="p-2 hover:bg-gray-200 rounded-full">
+                    <Button variant="ghost" size="icon" onClick={() => navigate({ type: 'home' })} className="rounded-full hover:bg-gray-200">
                         <IconChevronLeft className="w-6 h-6 text-gray-600" />
-                    </button>
+                    </Button>
                 )}
                 <div>
                     <h1 className="text-2xl font-bold text-gray-800">{title}</h1>

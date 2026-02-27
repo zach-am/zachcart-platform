@@ -2,6 +2,7 @@ import React from 'react';
 import { IconUser, IconHelp, IconChevronDown } from '../constants';
 import { useUI } from '../contexts/UIContext';
 import zachcartIcon from '../assets/branding/zachcart-icon.png';
+import { Button } from './ui/button';
 
 export const Header: React.FC = () => {
     const { navigate } = useUI();
@@ -18,9 +19,9 @@ export const Header: React.FC = () => {
                         Nossa Pharmacy (H... <IconChevronDown className="w-3 h-3" />
                     </div>
                 </div>
-                <button onClick={() => navigate({ type: 'help' })} className="p-2 text-white bg-teal-500 hover:bg-teal-600 rounded-full shadow-sm">
+                <Button size="icon" onClick={() => navigate({ type: 'help' })} className="rounded-full bg-teal-500 text-white shadow-sm hover:bg-teal-600">
                     <IconHelp className="w-5 h-5" />
-                </button>
+                </Button>
                 <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1 rounded-lg transition-colors">
                     <div className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center">
                         <IconUser className="w-5 h-5 text-white" />

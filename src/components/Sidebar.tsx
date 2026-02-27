@@ -3,6 +3,8 @@ import { useUI } from '../contexts/UIContext';
 import { IconHome, IconShoppingBag, IconTag, IconStore, IconChart, IconSettings, IconDollar, IconBookOpen } from '../constants';
 import zachcartLogo from '../assets/branding/zachcart-logo.svg';
 import zachcartIcon from '../assets/branding/zachcart-icon.png';
+import { buttonVariants } from './ui/button';
+import { cn } from '@/lib/utils';
 
 export const Sidebar: React.FC = () => {
     const { currentView, navigate, isSidebarCollapsed } = useUI();
@@ -36,11 +38,14 @@ export const Sidebar: React.FC = () => {
                         <div key={item.id}>
                             <button
                                 onClick={() => navigate({ type: item.id as any })}
-                                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
+                                className={cn(
+                                    buttonVariants({ variant: 'ghost' }),
+                                    `w-full justify-start gap-3 px-3 py-2.5 rounded-lg transition-colors h-auto ${
                                     isActive 
                                         ? 'bg-teal-50 text-teal-700 font-medium' 
                                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                                }`}
+                                }`
+                                )}
                             >
                                 <item.icon className={`w-5 h-5 ${isActive ? 'text-teal-600' : 'text-gray-500'}`} />
                                 {!isSidebarCollapsed && (
