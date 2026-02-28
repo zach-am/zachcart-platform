@@ -1,6 +1,9 @@
 import React from 'react';
 import { PageHeader } from './PageHeader';
 import { HELP_TOPICS, IconSearch, IconSparkles, IconWarning } from '../constants';
+import { Card, CardContent } from './ui/card';
+import { Input } from './ui/input';
+import { Button } from './ui/button';
 
 export const HelpCenterPage: React.FC = () => {
     return (
@@ -9,17 +12,17 @@ export const HelpCenterPage: React.FC = () => {
 
             <div className="relative mb-8">
                 <IconSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input 
+                <Input
                     type="text" 
                     placeholder="Search for questions, tutorials, or issues..." 
-                    className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl shadow-sm text-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                    className="h-auto rounded-xl border-gray-200 py-4 pl-12 pr-4 text-lg shadow-sm focus-visible:ring-teal-500"
                 />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2 space-y-8">
                     {HELP_TOPICS.map((section, idx) => (
-                        <div key={idx} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                        <Card key={idx} className="overflow-hidden rounded-xl border-gray-200 shadow-sm">
                             <div className="p-6 border-b border-gray-100 flex items-center gap-3 bg-gray-50">
                                 <div className="p-2 bg-white rounded-lg shadow-sm text-teal-600">
                                     <section.icon className="w-5 h-5" />
@@ -34,13 +37,14 @@ export const HelpCenterPage: React.FC = () => {
                                     </div>
                                 ))}
                             </div>
-                        </div>
+                        </Card>
                     ))}
                 </div>
 
                 <div className="space-y-6">
                     {/* Video Tutorials Card */}
-                    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <Card className="rounded-xl border-gray-200 shadow-sm">
+                        <CardContent className="p-6">
                         <h3 className="font-bold text-gray-900 mb-4">Video Tutorials</h3>
                         <div className="space-y-4">
                             <div className="group cursor-pointer">
@@ -68,20 +72,23 @@ export const HelpCenterPage: React.FC = () => {
                                 <p className="font-medium text-gray-800 text-sm group-hover:text-teal-600">Configuring delivery fees</p>
                             </div>
                         </div>
-                    </div>
+                        </CardContent>
+                    </Card>
 
                     {/* Support Actions */}
-                    <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 text-center">
+                    <Card className="rounded-xl border-gray-200 bg-gray-50 text-center">
+                        <CardContent className="p-6">
                         <p className="text-sm text-gray-500 mb-4">Didn't find what you were looking for?</p>
-                        <button className="w-full py-3 bg-teal-600 text-white rounded-lg font-bold hover:bg-teal-700 flex items-center justify-center gap-2 mb-3 shadow-sm">
+                        <Button className="mb-3 h-auto w-full gap-2 bg-teal-600 py-3 font-bold text-white shadow-sm hover:bg-teal-700">
                             <IconSparkles className="w-4 h-4" />
                             Chat with Support (AI)
-                        </button>
-                        <button className="w-full py-3 bg-white border border-gray-300 text-gray-700 rounded-lg font-bold hover:bg-gray-50 flex items-center justify-center gap-2">
+                        </Button>
+                        <Button variant="outline" className="h-auto w-full gap-2 border-gray-300 bg-white py-3 font-bold text-gray-700 shadow-none hover:bg-gray-50">
                             <IconWarning className="w-4 h-4 text-orange-500" />
                             Report an Issue
-                        </button>
-                    </div>
+                        </Button>
+                        </CardContent>
+                    </Card>
                 </div>
             </div>
         </div>

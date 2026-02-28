@@ -1,6 +1,8 @@
 import React from 'react';
 import { PageHeader } from './PageHeader';
 import { IconEdit } from '../constants';
+import { Card, CardContent } from './ui/card';
+import { Button } from './ui/button';
 
 export const SettingsPage: React.FC = () => {
     return (
@@ -9,7 +11,7 @@ export const SettingsPage: React.FC = () => {
 
             <div className="space-y-6">
                 {/* Dados da Empresa */}
-                <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <Card className="overflow-hidden rounded-xl border-gray-200 shadow-sm">
                     <div className="p-6 border-b border-gray-200 flex justify-between items-center">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-gray-100 rounded-lg text-gray-600">
@@ -17,11 +19,11 @@ export const SettingsPage: React.FC = () => {
                             </div>
                             <h3 className="text-lg font-bold text-gray-900">Company Details</h3>
                         </div>
-                        <button className="p-2 hover:bg-gray-100 rounded-full text-gray-500">
+                        <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full text-gray-500 hover:bg-gray-100">
                             <IconEdit className="w-5 h-5" />
-                        </button>
+                        </Button>
                     </div>
-                    <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <CardContent className="grid grid-cols-1 gap-8 p-6 md:grid-cols-2">
                         <div>
                             <label className="block text-sm text-gray-500 mb-1">Legal Name</label>
                             <p className="font-medium text-gray-900 text-lg">Our Pharmacy LLC</p>
@@ -38,11 +40,11 @@ export const SettingsPage: React.FC = () => {
                             <label className="block text-sm text-gray-500 mb-1">State Registration</label>
                             <p className="font-medium text-gray-900 text-lg">123.456.789.110</p>
                         </div>
-                    </div>
-                </div>
+                    </CardContent>
+                </Card>
 
                 {/* Endereço Principal */}
-                <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <Card className="overflow-hidden rounded-xl border-gray-200 shadow-sm">
                     <div className="p-6 border-b border-gray-200 flex justify-between items-center">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-gray-100 rounded-lg text-gray-600">
@@ -50,11 +52,11 @@ export const SettingsPage: React.FC = () => {
                             </div>
                             <h3 className="text-lg font-bold text-gray-900">Main Address</h3>
                         </div>
-                        <button className="p-2 hover:bg-gray-100 rounded-full text-gray-500">
+                        <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full text-gray-500 hover:bg-gray-100">
                             <IconEdit className="w-5 h-5" />
-                        </button>
+                        </Button>
                     </div>
-                    <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <CardContent className="grid grid-cols-1 gap-8 p-6 md:grid-cols-2">
                         <div>
                             <label className="block text-sm text-gray-500 mb-1">Zip Code</label>
                             <p className="font-medium text-gray-900 text-lg">10001</p>
@@ -71,8 +73,8 @@ export const SettingsPage: React.FC = () => {
                             <label className="block text-sm text-gray-500 mb-1">City / State</label>
                             <p className="font-medium text-gray-900 text-lg">New York / NY</p>
                         </div>
-                    </div>
-                </div>
+                    </CardContent>
+                </Card>
             </div>
         </div>
     );
